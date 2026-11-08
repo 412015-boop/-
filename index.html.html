@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>歐洲聯盟與國際情勢 互動測驗網</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: #f8fafc;
+        }
+        .drag-item {
+            cursor: grab;
+            user-select: none;
+            touch-action: none;
+        }
+        .drag-item:active {
+            cursor: grabbing;
+        }
+        .drop-zone {
+            transition: all 0.2s ease;
+        }
+        .drop-zone.drag-over {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+            transform: scale(1.02);
+        }
+        .option-card {
+            transition: all 0.15s ease;
+        }
+        .option-card:hover:not(:disabled) {
+            transform: translateY(-2px);
+        }
+        /* 淡入動畫 */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-earth-europe text-2xl text-yellow-300"></i>
+                <div>
+                    <h1 class="text-xl font-bold leading-tight">歐洲聯盟與國際情勢</h1>
+                    <p class="text-xs text-blue-200">互動式階段測驗</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="reset-btn" onclick="resetQuiz()" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded-lg border border-white/20 transition duration-200 flex items-center gap-2">
+                    <i class="fa-solid fa-rotate-right"></i> 重頭開始
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full space-y-6">
+
+        <!-- Stepper Progress Bar -->
+        <div id="progress-container" class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 space-y-2">
+            <div class="flex justify-between text-xs font-semibold text-slate-500">
+                <span id="step-label">第一階段：選擇題 (1/3)</span>
+                <span id="step-percent">33%</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                <div id="progress-bar" class="bg-gradient-to-r from-blue-500 to-indigo-600 h-2.5 rounded-full transition-all duration-300" style="width: 33%"></div>
+            </div>
+        </div>
+
+        <!-- SECTION 1: Step-by-Step Multiple Choice (逐題選擇題) -->
+        <div id="mcq-section" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="bg-blue-600 text-white text-xs px-2.5 py-1 rounded-md font-bold">單選擇題</span>
+                    <h2 class="text-lg font-bold text-slate-800" id="mcq-title-text">第 1 題 / 共 3 題</h2>
+                </div>
+                <span class="text-xs text-slate-500"><i class="fa-regular fa-hand-pointer mr-1"></i>點擊選項答題</span>
+            </div>
+
+            <div class="p-6">
+                <!-- Question 1 Container -->
+                <div class="question-step fade-in space-y-5" id="step-q1">
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-9 h-9 bg-blue-100 text-blue-700 font-bold rounded-full flex items-center justify-center text-base">1</span>
+                        <div class="text-lg text-slate-800 leading-relaxed font-medium">
+                            對於「歐洲聯盟」此區域組織的論述，下列哪些正確？<br>
+                            <span class="text-base text-slate-600 block mt-3 bg-slate-50 p-4 rounded-xl border border-slate-200/70 leading-relaxed">
+                                (甲) 總部位於荷蘭的布魯塞爾；<br>
+                                (乙) 至 2024 年為止共有 27 個成員國；<br>
+                                (丙) 並非所有成員國皆使用歐元；<br>
+                                (丁) 各成員國邊界皆無管制可任意進出。
+                            </span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 pl-0 sm:pl-12">
+                        <button onclick="answerMCQ(1, 'A')" id="q1-opt-A" class="option-card q1-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(A) 甲乙</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(1, 'B')" id="q1-opt-B" class="option-card q1-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(B) 甲丁</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(1, 'C')" id="q1-opt-C" class="option-card q1-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(C) 乙丙</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(1, 'D')" id="q1-opt-D" class="option-card q1-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(D) 丙丁</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                    </div>
+                    <!-- Detailed Explanation -->
+                    <div id="explain-1" class="hidden pl-0 sm:pl-12 pt-2 fade-in">
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4.5 text-base text-amber-900 space-y-2 leading-relaxed">
+                            <div class="font-bold flex items-center gap-1.5 text-amber-800 text-lg">
+                                <i class="fa-solid fa-lightbulb"></i> 解析（正確答案：C）
+                            </div>
+                            <p>(甲) 歐盟總部位於<b>比利時</b>的布魯塞爾（非荷蘭）。</p>
+                            <p>(乙) 截至 2024 年，歐盟共有 27 個成員國（正確）。</p>
+                            <p>(丙) 如丹麥等成員國未採用歐元，並非所有成員國皆使用歐元（正確）。</p>
+                            <p>(丁) 有參與申根公約的國家可免邊境管制，但並非所有成員國皆加入申根公約（如愛爾蘭未參加），且部分非歐盟國（如冰島）有加入申根公約。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 2 Container -->
+                <div class="question-step hidden space-y-5" id="step-q2">
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-9 h-9 bg-blue-100 text-blue-700 font-bold rounded-full flex items-center justify-center text-base">2</span>
+                        <div class="text-lg text-slate-800 leading-relaxed font-medium">
+                            歐元作為歐盟多數國家共通的貨幣後，「歐元區」為經濟上帶來什麼效應？
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 pl-0 sm:pl-12">
+                        <button onclick="answerMCQ(2, 'A')" id="q2-opt-A" class="option-card q2-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(A) 為有利於貿易，歐盟所有成員皆用歐元</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(2, 'B')" id="q2-opt-B" class="option-card q2-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(B) 減少各國貿易間的匯兌損失</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(2, 'C')" id="q2-opt-C" class="option-card q2-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(C) 歐元成員國可自行印鈔，避免通貨膨脹影響他國</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(2, 'D')" id="q2-opt-D" class="option-card q2-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(D) 因歐元貶值，導致歐債危機發生衝擊經濟</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                    </div>
+                    <!-- Detailed Explanation -->
+                    <div id="explain-2" class="hidden pl-0 sm:pl-12 pt-2 fade-in">
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4.5 text-base text-amber-900 space-y-2 leading-relaxed">
+                            <div class="font-bold flex items-center gap-1.5 text-amber-800 text-lg">
+                                <i class="fa-solid fa-lightbulb"></i> 解析（正確答案：B）
+                            </div>
+                            <p>使用歐元可減少各國貿易間的匯兌損失。但已將國家財政部分權力交給歐洲中央銀行，因此<b>無法自行決定鈔票印製量</b>。</p>
+                            <p>註：歐債危機主因與葡萄牙、義大利、愛爾蘭、希臘、西班牙等五大債務國（PIIGS）負債過多、無法償還有關。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 3 Container -->
+                <div class="question-step hidden space-y-5" id="step-q3">
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-9 h-9 bg-blue-100 text-blue-700 font-bold rounded-full flex items-center justify-center text-base">3</span>
+                        <div class="text-lg text-slate-800 leading-relaxed font-medium">
+                            甲先生是東歐某國的小麥農，早年生活困苦，但自從他們國家加入歐盟之後，甲先生的生活改變了。改變的項目<u class="font-bold border-b-2 border-slate-800">不包括</u>下列何者？
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 pl-0 sm:pl-12">
+                        <button onclick="answerMCQ(3, 'A')" id="q3-opt-A" class="option-card q3-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(A) 甲先生獲得歐盟的補貼與技術指導</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(3, 'B')" id="q3-opt-B" class="option-card q3-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(B) 生產的小麥可以於歐盟自由銷售</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(3, 'C')" id="q3-opt-C" class="option-card q3-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(C) 訂定小麥價格的自由度提高</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(3, 'D')" id="q3-opt-D" class="option-card q3-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(D) 非歐盟廉價小麥不再容易進入國內市場</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                    </div>
+                    <!-- Detailed Explanation -->
+                    <div id="explain-3" class="hidden pl-0 sm:pl-12 pt-2 fade-in">
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4.5 text-base text-amber-900 space-y-2 leading-relaxed">
+                            <div class="font-bold flex items-center gap-1.5 text-amber-800 text-lg">
+                                <i class="fa-solid fa-lightbulb"></i> 解析（正確答案：C）
+                            </div>
+                            <p>小麥價格通常由<b>市場供需及歐盟統一訂定</b>，而非農夫個人自由決定。故改變的項目不包含(C)。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Question Button Bar -->
+                <div id="next-btn-container" class="hidden mt-6 pt-4 border-t border-slate-100 text-right fade-in">
+                    <button id="next-step-btn" onclick="goToNextStep()" class="px-7 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-base rounded-xl shadow transition duration-200 inline-flex items-center gap-2">
+                        <span>下一題</span> <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: Drag and Drop Fill in the Blanks (拖拽填空題) -->
+        <div id="drag-section" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden fade-in">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
+                    <span class="bg-indigo-600 text-white text-xs px-2.5 py-1 rounded-md font-bold">第二階段</span>
+                    <h2 class="text-xl font-bold text-slate-800">歐洲議題整合填空（拖拽卡片題）</h2>
+                </div>
+                <span class="text-sm text-slate-500"><i class="fa-solid fa-hand-pointer mr-1"></i>拖拽卡片或點擊卡片填入空格</span>
+            </div>
+
+            <div class="p-6 space-y-6">
+                <!-- Word Bank (選項庫) -->
+                <div class="bg-indigo-50/60 p-4 rounded-xl border border-indigo-100">
+                    <div class="text-sm font-bold text-indigo-900 mb-3 flex items-center gap-1">
+                        <i class="fa-solid fa-cubes"></i> 拖拽答案選項卡片：
+                    </div>
+                    <div id="word-bank" class="flex flex-wrap gap-3 min-h-[50px] items-center">
+                        <!-- Items rendered via JS -->
+                    </div>
+                </div>
+
+                <!-- Table Assessment -->
+                <div class="overflow-x-auto rounded-xl border border-slate-200">
+                    <table class="w-full border-collapse text-left text-base">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700 font-semibold border-b border-slate-200 text-base">
+                                <th class="p-4 w-32 sm:w-40 border-r border-slate-200 text-center">議題主題</th>
+                                <th class="p-4">說明內容與填空項</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <!-- Row 1: 歐債危機 -->
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-4 font-bold text-slate-800 bg-slate-50/50 border-r border-slate-200 text-center text-lg">
+                                    歐債危機
+                                </td>
+                                <td class="p-4 leading-loose">
+                                    2010 年，以南歐為主 PIIGS（歐豬五國）的 
+                                    <div class="drop-zone inline-flex items-center justify-center min-w-[220px] min-h-[42px] mx-1 px-3 bg-slate-100 border-2 border-dashed border-slate-300 rounded-lg align-middle" data-target="8">
+                                        <span class="zone-placeholder text-sm text-slate-400 font-medium">⑧ 拖拽答案至此</span>
+                                    </div>
+                                    ，皆因舉債過高陷入信用危機。
+                                </td>
+                            </tr>
+                            <!-- Row 2: 英國脫歐 -->
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-4 font-bold text-slate-800 bg-slate-50/50 border-r border-slate-200 text-center text-lg">
+                                    英國脫歐
+                                </td>
+                                <td class="p-4 space-y-3 leading-loose">
+                                    <p class="font-medium text-slate-700 text-base">請簡述「脫歐」對英國的正、負面影響？</p>
+                                    <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                                        <span class="font-bold text-blue-700 w-16 text-base">正面：</span>
+                                        <div class="drop-zone inline-flex items-center justify-center min-w-[280px] sm:flex-1 min-h-[42px] px-3 bg-slate-100 border-2 border-dashed border-slate-300 rounded-lg" data-target="9">
+                                            <span class="zone-placeholder text-sm text-slate-400 font-medium">⑨ 拖拽答案至此</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                                        <span class="font-bold text-red-600 w-16 text-base">負面：</span>
+                                        <div class="drop-zone inline-flex items-center justify-center min-w-[280px] sm:flex-1 min-h-[42px] px-3 bg-slate-100 border-2 border-dashed border-slate-300 rounded-lg" data-target="10">
+                                            <span class="zone-placeholder text-sm text-slate-400 font-medium">⑩ 拖拽答案至此</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 3: 俄烏戰爭 -->
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-4 font-bold text-slate-800 bg-slate-50/50 border-r border-slate-200 text-center text-lg">
+                                    俄烏戰爭
+                                </td>
+                                <td class="p-4 leading-loose">
+                                    2022 年 2 月俄羅斯入侵烏克蘭，歐盟對俄羅斯祭出經濟制裁，如 
+                                    <div class="drop-zone inline-flex items-center justify-center min-w-[200px] min-h-[42px] mx-1 px-3 bg-slate-100 border-2 border-dashed border-slate-300 rounded-lg align-middle" data-target="11">
+                                        <span class="zone-placeholder text-sm text-slate-400 font-medium">⑪ 拖拽答案至此</span>
+                                    </div>
+                                    ，但對長期依賴俄羅斯能源的歐盟成員國影響甚大，使歐盟對外的一體性受到衝擊。
+                                </td>
+                            </tr>
+                            <!-- Row 4: 難民問題 -->
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-4 font-bold text-slate-800 bg-slate-50/50 border-r border-slate-200 text-center text-lg">
+                                    難民問題
+                                </td>
+                                <td class="p-4 space-y-2 leading-loose">
+                                    受 2010 年阿拉伯之春的影響，大批來自 
+                                    <div class="drop-zone inline-flex items-center justify-center min-w-[150px] min-h-[42px] mx-1 px-3 bg-slate-100 border-2 border-dashed border-slate-300 rounded-lg align-middle" data-target="12">
+                                        <span class="zone-placeholder text-sm text-slate-400 font-medium">⑫ 拖拽答案至此</span>
+                                    </div>
+                                    難民湧入歐洲，2015 年歐盟通過難民分配計畫，但部分成員國不願接受難民，甚至暫停申根公約，加上俄烏戰爭又有來自 
+                                    <div class="drop-zone inline-flex items-center justify-center min-w-[150px] min-h-[42px] mx-1 px-3 bg-slate-100 border-2 border-dashed border-slate-300 rounded-lg align-middle" data-target="13">
+                                        <span class="zone-placeholder text-sm text-slate-400 font-medium">⑬ 拖拽答案至此</span>
+                                    </div>
+                                    的難民湧入歐洲，各國承受更大的難民壓力。
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="text-center pt-3">
+                    <button onclick="submitFillInBlanks()" class="px-8 py-3.5 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-bold text-lg rounded-xl shadow-md hover:shadow-lg transition duration-200 inline-flex items-center gap-2">
+                        <i class="fa-solid fa-square-check"></i> 完成填空並查看最終總成績
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: Final Score Summary -->
+        <div id="final-result-section" class="hidden bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center space-y-6 fade-in">
+            <div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-3xl mx-auto">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <div>
+                <h2 class="text-3xl font-bold text-slate-800" id="final-score-title">測驗完成！</h2>
+                <div class="text-6xl font-extrabold text-blue-600 my-4" id="final-score-text">0 / 100 分</div>
+                <p class="text-slate-600 text-base" id="final-score-desc">感謝完成本次歐盟與國際情勢測驗。</p>
+            </div>
+
+            <!-- Drag & Drop Explanation Reference -->
+            <div class="text-left bg-amber-50 border border-amber-200 rounded-xl p-6 text-base text-amber-900 space-y-3">
+                <div class="font-bold flex items-center gap-2 text-amber-800 text-lg">
+                    <i class="fa-solid fa-lightbulb"></i> 填空題觀念備忘對照：
+                </div>
+                <ul class="list-disc pl-6 space-y-2 leading-relaxed">
+                    <li><b>⑧ PIIGS 歐豬五國：</b>葡萄牙、義大利、愛爾蘭、希臘、西班牙。</li>
+                    <li><b>⑨ 英國脫歐正面：</b>可免除英國對其他會員國的援助預算、提高各項政策的自主性。</li>
+                    <li><b>⑩ 英國脫歐負面：</b>喪失與歐盟各國間的貿易優惠，使企業成本增加，降低投資意願。</li>
+                    <li><b>⑪ 俄烏戰爭制裁：</b>禁止進口俄國石油。</li>
+                    <li><b>⑫ 阿拉伯之春難民來源：</b>西亞、北非。</li>
+                    <li><b>⑬ 俄烏戰爭難民來源：</b>烏克蘭。</li>
+                </ul>
+            </div>
+
+            <div class="pt-4">
+                <button onclick="resetQuiz()" class="px-8 py-3.5 bg-slate-800 hover:bg-slate-900 text-white font-semibold text-base rounded-xl transition">
+                    <i class="fa-solid fa-rotate-right mr-2"></i> 再次挑戰
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-6 text-center text-sm">
+        <p>歐洲聯盟區域歷史與地理互動學習測驗板</p>
+    </footer>
+
+    <!-- JavaScript App Logic -->
+    <script>
+        // Options Data Source
+        const fillAnswersData = [
+            { id: "8", text: "葡萄牙、義大利、愛爾蘭、希臘、西班牙" },
+            { id: "9", text: "可免除英國對其他會員國的援助預算、提高各項政策的自主性" },
+            { id: "10", text: "喪失與歐盟各國間的貿易優惠，使企業成本增加，降低投資意願" },
+            { id: "11", text: "禁止進口俄國石油" },
+            { id: "12", text: "西亞、北非" },
+            { id: "13", text: "烏克蘭" }
+        ];
+
+        const correctOptions = { 1: "C", 2: "B", 3: "C" };
+        let userSelectOptions = { 1: null, 2: null, 3: null };
+        let currentMCQStep = 1;
+        let draggedElement = null;
+
+        window.onload = function() {
+            initWordBank();
+            setupDropZones();
+            updateProgressBar();
+        };
+
+        // Handle Choice Selection and Show Explanation Immediately
+        function answerMCQ(qNum, option) {
+            if (userSelectOptions[qNum] !== null) return; // Prevent re-answering once done
+            
+            userSelectOptions[qNum] = option;
+            const correct = correctOptions[qNum];
+
+            // Disable buttons for this question
+            const options = document.querySelectorAll(`.q${qNum}-opt`);
+            options.forEach(opt => {
+                opt.disabled = true;
+                opt.classList.add("cursor-not-allowed");
+            });
+
+            // Highlight chosen & correct option
+            if (option === correct) {
+                const selectedBtn = document.getElementById(`q${qNum}-opt-${option}`);
+                selectedBtn.classList.add("border-emerald-500", "bg-emerald-50");
+                const icon = selectedBtn.querySelector(".check-icon");
+                icon.className = "fa-solid fa-circle-check text-emerald-600 check-icon";
+            } else {
+                const wrongBtn = document.getElementById(`q${qNum}-opt-${option}`);
+                wrongBtn.classList.add("border-red-500", "bg-red-50");
+                const wrongIcon = wrongBtn.querySelector(".check-icon");
+                wrongIcon.className = "fa-solid fa-circle-xmark text-red-500 check-icon";
+
+                // Show correct one
+                const correctBtn = document.getElementById(`q${qNum}-opt-${correct}`);
+                correctBtn.classList.add("border-emerald-500", "bg-emerald-50/60");
+                const correctIcon = correctBtn.querySelector(".check-icon");
+                correctIcon.className = "fa-solid fa-circle-check text-emerald-600 check-icon";
+            }
+
+            // Reveal detailed explanation immediately
+            document.getElementById(`explain-${qNum}`).classList.remove("hidden");
+
+            // Reveal Next Button
+            const nextContainer = document.getElementById("next-btn-container");
+            const nextBtn = document.getElementById("next-step-btn");
+            nextContainer.classList.remove("hidden");
+
+            if (currentMCQStep === 3) {
+                nextBtn.innerHTML = `<span>完成選擇題，前往填空階段</span> <i class="fa-solid fa-arrow-right"></i>`;
+                nextBtn.className = "px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm rounded-xl shadow transition duration-200 inline-flex items-center gap-2";
+            }
+        }
+
+        // Advance to Next Step
+        function goToNextStep() {
+            if (currentMCQStep < 3) {
+                // Hide current question, show next
+                document.getElementById(`step-q${currentMCQStep}`).classList.add("hidden");
+                currentMCQStep++;
+                document.getElementById(`step-q${currentMCQStep}`).classList.remove("hidden");
+
+                // Update Header Text
+                document.getElementById("mcq-title-text").innerText = `第 ${currentMCQStep} 題 / 共 3 題`;
+
+                // Hide Next Container until next answer is clicked
+                document.getElementById("next-btn-container").classList.add("hidden");
+                updateProgressBar();
+            } else {
+                // MCQ finished, switch to Drag & Drop Section
+                document.getElementById("mcq-section").classList.add("hidden");
+                document.getElementById("drag-section").classList.remove("hidden");
+                updateProgressBar(true);
+            }
+        }
+
+        function updateProgressBar(isDragSection = false) {
+            const stepLabel = document.getElementById("step-label");
+            const stepPercent = document.getElementById("step-percent");
+            const progressBar = document.getElementById("progress-bar");
+
+            if (isDragSection) {
+                stepLabel.innerText = "第二階段：表格填空測驗";
+                stepPercent.innerText = "80%";
+                progressBar.style.width = "80%";
+            } else if (currentMCQStep <= 3) {
+                const percent = Math.round((currentMCQStep / 4) * 100);
+                stepLabel.innerText = `第一階段：選擇題 (${currentMCQStep}/3)`;
+                stepPercent.innerText = `${percent}%`;
+                progressBar.style.width = `${percent}%`;
+            }
+        }
+
+        // Fill-in-the-blanks logic
+        function initWordBank() {
+            const wordBank = document.getElementById("word-bank");
+            wordBank.innerHTML = "";
+            const shuffled = [...fillAnswersData].sort(() => Math.random() - 0.5);
+
+            shuffled.forEach(item => {
+                const card = document.createElement("div");
+                card.id = `card-${item.id}`;
+                card.dataset.id = item.id;
+                card.draggable = true;
+                card.className = "drag-item bg-white border border-slate-300 text-slate-800 px-3.5 py-2 rounded-xl text-sm font-medium shadow-sm hover:border-indigo-400 hover:text-indigo-600 transition flex items-center gap-2";
+                card.innerHTML = `<i class="fa-solid fa-grip-dots-vertical text-slate-300"></i> <span>${item.text}</span>`;
+
+                card.addEventListener("dragstart", handleDragStart);
+                card.addEventListener("dragend", handleDragEnd);
+                card.addEventListener("click", () => handleCardClick(item.id));
+
+                wordBank.appendChild(card);
+            });
+        }
+
+        function handleCardClick(itemId) {
+            const card = document.getElementById(`card-${itemId}`);
+            if (!card || card.parentElement.classList.contains("drop-zone")) return;
+
+            const zones = document.querySelectorAll(".drop-zone");
+            for (let zone of zones) {
+                if (!zone.querySelector(".drag-item")) {
+                    placeItemInZone(card, zone);
+                    break;
+                }
+            }
+        }
+
+        function handleDragStart(e) {
+            draggedElement = this;
+            e.dataTransfer.setData("text/plain", this.dataset.id);
+            setTimeout(() => this.classList.add("opacity-40"), 0);
+        }
+
+        function handleDragEnd() {
+            this.classList.remove("opacity-40");
+            draggedElement = null;
+        }
+
+        function setupDropZones() {
+            const zones = document.querySelectorAll(".drop-zone");
+            const wordBank = document.getElementById("word-bank");
+
+            zones.forEach(zone => {
+                zone.addEventListener("dragover", e => {
+                    e.preventDefault();
+                    zone.classList.add("drag-over");
+                });
+
+                zone.addEventListener("dragleave", () => {
+                    zone.classList.remove("drag-over");
+                });
+
+                zone.addEventListener("drop", e => {
+                    e.preventDefault();
+                    zone.classList.remove("drag-over");
+                    if (draggedElement) {
+                        placeItemInZone(draggedElement, zone);
+                    }
+                });
+
+                zone.addEventListener("click", (e) => {
+                    const item = zone.querySelector(".drag-item");
+                    if (item && e.target !== item) {
+                        returnToWordBank(item);
+                    }
+                });
+            });
+
+            wordBank.addEventListener("dragover", e => e.preventDefault());
+            wordBank.addEventListener("drop", e => {
+                e.preventDefault();
+                if (draggedElement) {
+                    returnToWordBank(draggedElement);
+                }
+            });
+        }
+
+        function placeItemInZone(item, zone) {
+            const existingItem = zone.querySelector(".drag-item");
+            if (existingItem) {
+                returnToWordBank(existingItem);
+            }
+
+            const placeholder = zone.querySelector(".zone-placeholder");
+            if (placeholder) placeholder.style.display = "none";
+
+            zone.appendChild(item);
+            zone.classList.remove("border-dashed", "bg-slate-100");
+            zone.classList.add("border-solid", "border-indigo-300", "bg-indigo-50/30");
+        }
+
+        function returnToWordBank(item) {
+            const zone = item.parentElement;
+            if (zone && zone.classList.contains("drop-zone")) {
+                const placeholder = zone.querySelector(".zone-placeholder");
+                if (placeholder) placeholder.style.display = "inline";
+                zone.classList.add("border-dashed", "bg-slate-100");
+                zone.classList.remove("border-solid", "border-indigo-300", "bg-indigo-50/30", "border-emerald-500", "border-red-500", "bg-emerald-50", "bg-red-50");
+            }
+            document.getElementById("word-bank").appendChild(item);
+        }
+
+        // Final Submission and Scoring
+        function submitFillInBlanks() {
+            let correctCount = 0;
+            const totalQuestions = 9; // 3 MCQs + 6 Drag & Drops
+
+            // Count MCQ score
+            for (let q = 1; q <= 3; q++) {
+                if (userSelectOptions[q] === correctOptions[q]) {
+                    correctCount++;
+                }
+            }
+
+            // Grade Drag and Drop
+            const zones = document.querySelectorAll(".drop-zone");
+            zones.forEach(zone => {
+                const targetId = zone.dataset.target;
+                const placedItem = zone.querySelector(".drag-item");
+
+                if (placedItem) {
+                    placedItem.draggable = false;
+                    placedItem.classList.remove("drag-item");
+
+                    if (placedItem.dataset.id === targetId) {
+                        correctCount++;
+                        zone.classList.remove("border-indigo-300", "bg-indigo-50/30");
+                        zone.classList.add("border-emerald-500", "bg-emerald-50");
+                        placedItem.classList.add("text-emerald-800", "font-bold");
+                    } else {
+                        zone.classList.remove("border-indigo-300", "bg-indigo-50/30");
+                        zone.classList.add("border-red-500", "bg-red-50");
+                        placedItem.classList.add("text-red-800", "line-through");
+                    }
+                } else {
+                    zone.classList.add("border-red-400", "bg-red-50/30");
+                }
+            });
+
+            // Calculate final score
+            const finalScore = Math.round((correctCount / totalQuestions) * 100);
+
+            // Hide Drag Section and Progress Bar, Show Summary
+            document.getElementById("drag-section").classList.add("hidden");
+            document.getElementById("progress-container").classList.add("hidden");
+
+            const finalResultSection = document.getElementById("final-result-section");
+            const finalScoreText = document.getElementById("final-score-text");
+            const finalScoreTitle = document.getElementById("final-score-title");
+
+            finalScoreText.innerText = `${finalScore} 分`;
+            if (finalScore === 100) {
+                finalScoreTitle.innerText = "🎉 太棒了！完美全對！";
+                finalScoreText.className = "text-5xl font-extrabold text-emerald-600 my-3";
+            } else if (finalScore >= 60) {
+                finalScoreTitle.innerText = "👍 恭喜合格！表現相當優異！";
+                finalScoreText.className = "text-5xl font-extrabold text-blue-600 my-3";
+            } else {
+                finalScoreTitle.innerText = "💪 繼續加油！多加複習觀念喔！";
+                finalScoreText.className = "text-5xl font-extrabold text-amber-600 my-3";
+            }
+
+            finalResultSection.classList.remove("hidden");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        // Full Reset
+        function resetQuiz() {
+            userSelectOptions = { 1: null, 2: null, 3: null };
+            currentMCQStep = 1;
+
+            // Reset MCQs UI
+            for (let q = 1; q <= 3; q++) {
+                document.getElementById(`explain-${q}`).classList.add("hidden");
+                const step = document.getElementById(`step-q${q}`);
+                if (q === 1) {
+                    step.classList.remove("hidden");
+                } else {
+                    step.classList.add("hidden");
+                }
+
+                const options = document.querySelectorAll(`.q${q}-opt`);
+                options.forEach(opt => {
+                    opt.disabled = false;
+                    opt.className = `option-card q${q}-opt text-left p-3.5 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-sm flex items-center justify-between`;
+                    const icon = opt.querySelector(".check-icon");
+                    icon.className = "fa-regular fa-circle text-slate-300 check-icon";
+                });
+            }
+
+            document.getElementById("mcq-title-text").innerText = `第 1 題 / 共 3 題`;
+            document.getElementById("next-btn-container").classList.add("hidden");
+
+            // Reset Zones & Sections
+            const zones = document.querySelectorAll(".drop-zone");
+            zones.forEach(zone => {
+                const item = zone.querySelector(".drag-item, [data-id]");
+                if (item) item.remove();
+                const placeholder = zone.querySelector(".zone-placeholder");
+                if (placeholder) placeholder.style.display = "inline";
+
+                zone.className = "drop-zone inline-flex items-center justify-center min-w-[140px] h-9 mx-1 px-3 bg-slate-100 border-2 border-dashed border-slate-300 rounded-lg align-middle";
+            });
+
+            document.getElementById("mcq-section").classList.remove("hidden");
+            document.getElementById("drag-section").classList.add("hidden");
+            document.getElementById("final-result-section").classList.add("hidden");
+            document.getElementById("progress-container").classList.remove("hidden");
+
+            initWordBank();
+            updateProgressBar();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    </script>
+</body>
+</html>
