@@ -73,11 +73,11 @@
         <!-- Stepper Progress Bar -->
         <div id="progress-container" class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 space-y-2">
             <div class="flex justify-between text-xs font-semibold text-slate-500">
-                <span id="step-label">第一階段：選擇題 (1/3)</span>
-                <span id="step-percent">33%</span>
+                <span id="step-label">第一階段：選擇題 (1/8)</span>
+                <span id="step-percent">12%</span>
             </div>
             <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
-                <div id="progress-bar" class="bg-gradient-to-r from-blue-500 to-indigo-600 h-2.5 rounded-full transition-all duration-300" style="width: 33%"></div>
+                <div id="progress-bar" class="bg-gradient-to-r from-blue-500 to-indigo-600 h-2.5 rounded-full transition-all duration-300" style="width: 12%"></div>
             </div>
         </div>
 
@@ -86,7 +86,7 @@
             <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex items-center justify-between">
                 <div class="flex items-center gap-2">
                     <span class="bg-blue-600 text-white text-xs px-2.5 py-1 rounded-md font-bold">單選擇題</span>
-                    <h2 class="text-lg font-bold text-slate-800" id="mcq-title-text">第 1 題 / 共 3 題</h2>
+                    <h2 class="text-lg font-bold text-slate-800" id="mcq-title-text">第 1 題 / 共 8 題</h2>
                 </div>
                 <span class="text-xs text-slate-500"><i class="fa-regular fa-hand-pointer mr-1"></i>點擊選項答題</span>
             </div>
@@ -209,6 +209,211 @@
                                 <i class="fa-solid fa-lightbulb"></i> 解析（正確答案：C）
                             </div>
                             <p>小麥價格通常由<b>市場供需及歐盟統一訂定</b>，而非農夫個人自由決定。故改變的項目不包含(C)。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 4 Container (題號 7) -->
+                <div class="question-step hidden space-y-5" id="step-q4">
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-9 h-9 bg-blue-100 text-blue-700 font-bold rounded-full flex items-center justify-center text-base">4</span>
+                        <div class="text-lg text-slate-800 leading-relaxed font-medium">
+                            奧地利郵政服務單位於 2020 年 1 月底正式發行這張郵票，象徵著某國正式脫離歐盟成員，該國民眾想脫離歐盟主要與哪些因素有關？<br>
+                            <span class="text-base text-slate-600 block mt-3 bg-slate-50 p-4 rounded-xl border border-slate-200/70 leading-relaxed">
+                                (甲) 不願意接納大量難民；<br>
+                                (乙) 不願意繼續使用共同貨幣歐元；<br>
+                                (丙) 想提高國內政策自主性；<br>
+                                (丁) 避免他國廉價貨物傾銷國內；<br>
+                                (戊) 免除對其他成員國的援助。
+                            </span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 pl-0 sm:pl-12">
+                        <button onclick="answerMCQ(4, 'A')" id="q4-opt-A" class="option-card q4-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(A) 甲乙丁</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(4, 'B')" id="q4-opt-B" class="option-card q4-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(B) 甲丙戊</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(4, 'C')" id="q4-opt-C" class="option-card q4-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(C) 乙丙丁</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(4, 'D')" id="q4-opt-D" class="option-card q4-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(D) 丙丁戊</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                    </div>
+                    <!-- Detailed Explanation -->
+                    <div id="explain-4" class="hidden pl-0 sm:pl-12 pt-2 fade-in">
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4.5 text-base text-amber-900 space-y-2 leading-relaxed">
+                            <div class="font-bold flex items-center gap-1.5 text-amber-800 text-lg">
+                                <i class="fa-solid fa-lightbulb"></i> 解析（正確答案：B）
+                            </div>
+                            <p>從郵票左側「BREXIT」字樣可知為<b>英國脫歐</b>事件。</p>
+                            <p>英國脫離歐盟主因包括：<b>歐債危機衝擊</b>、<b>不願遵從歐盟難民政策(甲)</b>、<b>欲減免對他國援助的支出(戊)</b>、<b>提高國內政策自主性(丙)</b>。</p>
+                            <p>註：(乙)錯誤，英國原本就未加入歐元區（使用英鎊）；(丁)錯誤，脫歐會失去歐盟自由貿易優惠，並非主要防傾銷原因。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 5 Container (題號 10) -->
+                <div class="question-step hidden space-y-5" id="step-q5">
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-9 h-9 bg-blue-100 text-blue-700 font-bold rounded-full flex items-center justify-center text-base">5</span>
+                        <div class="text-lg text-slate-800 leading-relaxed font-medium">
+                            西班牙的加泰隆尼亞自治區為西國的工業重鎮，每年可為西班牙創造 19% 的經濟產值，為全西班牙最富裕的地區，但此區獨立聲浪不斷，除了因語言與風俗文化與法國較為類似，對西班牙認同感較低外，特別是<u class="border-b-2 border-slate-800 font-bold text-blue-700 px-1"> (□) </u>發生，西國因面臨嚴重財政危機，失業率飆到 26%，政府實施撙節政策，導致加泰隆尼亞區每年繳給中央政府多，但獲得統籌款少，促使 2017 年又一波獨立公投行動出現，文中<u class="border-b-2 border-slate-800 font-bold text-blue-700 px-1"> (□) </u>應該為甚麼事件？
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 pl-0 sm:pl-12">
+                        <button onclick="answerMCQ(5, 'A')" id="q5-opt-A" class="option-card q5-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(A) 石油危機</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(5, 'B')" id="q5-opt-B" class="option-card q5-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(B) 難民問題</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(5, 'C')" id="q5-opt-C" class="option-card q5-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(C) 歐債危機</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(5, 'D')" id="q5-opt-D" class="option-card q5-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(D) 亞洲金融風暴</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                    </div>
+                    <!-- Detailed Explanation -->
+                    <div id="explain-5" class="hidden pl-0 sm:pl-12 pt-2 fade-in">
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4.5 text-base text-amber-900 space-y-2 leading-relaxed">
+                            <div class="font-bold flex items-center gap-1.5 text-amber-800 text-lg">
+                                <i class="fa-solid fa-lightbulb"></i> 解析（正確答案：C）
+                            </div>
+                            <p>西班牙因使用歐元且大量借貸無法償還爆發<b>歐債危機</b>。歐盟雖有金錢援助，但要求西班牙實施撙節政策，進而引發加泰隆尼亞區內部不滿，促成獨立公投聲浪。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scenario Intro for Q6-Q8 -->
+                <!-- Question 6 Container (題號 16) -->
+                <div class="question-step hidden space-y-5" id="step-q6">
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-200 text-base text-blue-950 leading-relaxed font-medium">
+                        <i class="fa-solid fa-file-text text-blue-600 mr-1.5"></i> <b>題組背景描述：</b><br>
+                        敘利亞內戰導致境內 660 萬人流離失所，逃往國外的敘利亞難民已超過 400 萬人，甲先生計畫先帶著一家人逃離敘利亞，再靠新聞訊息來決定下一站要前往哪裡前進。
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-9 h-9 bg-blue-100 text-blue-700 font-bold rounded-full flex items-center justify-center text-base">6</span>
+                        <div class="text-lg text-slate-800 leading-relaxed font-medium">
+                            甲先生聽廣播中提及 X 國近日陸續接納 80 萬西亞難民，除了人道考量外，究其原因之一是為了填補 X 國勞動力不足的問題。若已知歐洲 2001～2011 年人口成長率分布，廣播中提及的 X 國較有可能為策略性引進難民填補人口負成長的何者？
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 pl-0 sm:pl-12">
+                        <button onclick="answerMCQ(6, 'A')" id="q6-opt-A" class="option-card q6-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(A) 德國</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(6, 'B')" id="q6-opt-B" class="option-card q6-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(B) 法國</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(6, 'C')" id="q6-opt-C" class="option-card q6-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(C) 波蘭</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(6, 'D')" id="q6-opt-D" class="option-card q6-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(D) 愛爾蘭</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                    </div>
+                    <!-- Detailed Explanation -->
+                    <div id="explain-6" class="hidden pl-0 sm:pl-12 pt-2 fade-in">
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4.5 text-base text-amber-900 space-y-2 leading-relaxed">
+                            <div class="font-bold flex items-center gap-1.5 text-amber-800 text-lg">
+                                <i class="fa-solid fa-lightbulb"></i> 解析（正確答案：A）
+                            </div>
+                            <p>從歐洲人口成長率分布圖來看，四個選項中<b>只有德國呈現顯著人口負成長</b>（咖啡色區域多），其餘國家多為正成長。因此最需要仰賴難民來填補國內基層勞動力空缺的國家為<b>德國</b>。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 7 Container (題號 17) -->
+                <div class="question-step hidden space-y-5" id="step-q7">
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-9 h-9 bg-blue-100 text-blue-700 font-bold rounded-full flex items-center justify-center text-base">7</span>
+                        <div class="text-lg text-slate-800 leading-relaxed font-medium">
+                            若甲先生一家人由希臘上岸後，一路沿著東南歐進入中央區域，最後到達巴黎，關於沿途的自然或人文地景變化的描述下列何者正確？
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 pl-0 sm:pl-12">
+                        <button onclick="answerMCQ(7, 'A')" id="q7-opt-A" class="option-card q7-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(A) 沿途信奉伊斯蘭教民眾比例逐漸升高</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(7, 'B')" id="q7-opt-B" class="option-card q7-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(B) 地勢崎嶇程度持續增加</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(7, 'C')" id="q7-opt-C" class="option-card q7-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(C) 由灌木林轉成溫帶草原景觀</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(7, 'D')" id="q7-opt-D" class="option-card q7-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(D) 各國民眾使用貨幣漸趨統一</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                    </div>
+                    <!-- Detailed Explanation -->
+                    <div id="explain-7" class="hidden pl-0 sm:pl-12 pt-2 fade-in">
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4.5 text-base text-amber-900 space-y-2 leading-relaxed">
+                            <div class="font-bold flex items-center gap-1.5 text-amber-800 text-lg">
+                                <i class="fa-solid fa-lightbulb"></i> 解析（正確答案：D）
+                            </div>
+                            <p>(A) 沿途僅科索沃、阿爾巴尼亞信奉伊斯蘭教為主，其餘多國為天主教或東正教，比例並未升高。</p>
+                            <p>(B) 地勢由阿爾卑斯山系轉為中央丘陵，最後到達歐洲大平原，<b>地形起伏漸小</b>。</p>
+                            <p>(C) 巴爾幹半島多為溫帶灌木林，進入法國逐漸轉為<b>溫帶落葉林</b>（非草原）。</p>
+                            <p>(D) 正確。途經巴爾幹半島多國非歐元區，但進入奧地利、德國與法國後均使用歐元，貨幣漸趨統一。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 8 Container (題號 18) -->
+                <div class="question-step hidden space-y-5" id="step-q8">
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-9 h-9 bg-blue-100 text-blue-700 font-bold rounded-full flex items-center justify-center text-base">8</span>
+                        <div class="text-lg text-slate-800 leading-relaxed font-medium">
+                            近年大批中東和非洲難民移入歐洲各地，對歐洲國家的社會、經濟和環境等方面，造成不小的影響，下列敘述何者正確？
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 pl-0 sm:pl-12">
+                        <button onclick="answerMCQ(8, 'A')" id="q8-opt-A" class="option-card q8-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(A) 大量人口移入促使房價攀升</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(8, 'B')" id="q8-opt-B" class="option-card q8-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(B) 歐洲環境壓力減少</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(8, 'C')" id="q8-opt-C" class="option-card q8-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(C) 歐盟國家社會福利支出增加</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                        <button onclick="answerMCQ(8, 'D')" id="q8-opt-D" class="option-card q8-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between">
+                            <span>(D) 加速族群融合</span>
+                            <i class="fa-regular fa-circle text-slate-300 check-icon text-lg"></i>
+                        </button>
+                    </div>
+                    <!-- Detailed Explanation -->
+                    <div id="explain-8" class="hidden pl-0 sm:pl-12 pt-2 fade-in">
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4.5 text-base text-amber-900 space-y-2 leading-relaxed">
+                            <div class="font-bold flex items-center gap-1.5 text-amber-800 text-lg">
+                                <i class="fa-solid fa-lightbulb"></i> 解析（正確答案：C）
+                            </div>
+                            <p>(A) 難民資金有限，短期內無法大量購屋，不會直接促使房價大幅攀升。</p>
+                            <p>(B) 人口急劇增加反而使得<b>環境壓力上升</b>。</p>
+                            <p>(C) 正確。接待國家需為難民提供庇護所、醫療、基本生活物資與教育，大幅<b>拉高社會福利負擔與支出</b>。</p>
+                            <p>(D) 難民原鄉文化、生活習慣與宗教異於歐洲當地，常傾向分區聚居，造成<b>族群融合困難</b>與社會對立。</p>
                         </div>
                     </div>
                 </div>
@@ -381,8 +586,9 @@
             { id: "13", text: "烏克蘭" }
         ];
 
-        const correctOptions = { 1: "C", 2: "B", 3: "C" };
-        let userSelectOptions = { 1: null, 2: null, 3: null };
+        const TOTAL_MCQ = 8;
+        const correctOptions = { 1: "C", 2: "B", 3: "C", 4: "B", 5: "C", 6: "A", 7: "D", 8: "C" };
+        let userSelectOptions = { 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null, 8: null };
         let currentMCQStep = 1;
         let draggedElement = null;
 
@@ -433,22 +639,22 @@
             const nextBtn = document.getElementById("next-step-btn");
             nextContainer.classList.remove("hidden");
 
-            if (currentMCQStep === 3) {
-                nextBtn.innerHTML = `<span>完成選擇題，前往填空階段</span> <i class="fa-solid fa-arrow-right"></i>`;
-                nextBtn.className = "px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm rounded-xl shadow transition duration-200 inline-flex items-center gap-2";
+            if (currentMCQStep === TOTAL_MCQ) {
+                nextBtn.innerHTML = `<span>完成所有選擇題，前往填空階段</span> <i class="fa-solid fa-arrow-right"></i>`;
+                nextBtn.className = "px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-base rounded-xl shadow transition duration-200 inline-flex items-center gap-2";
             }
         }
 
         // Advance to Next Step
         function goToNextStep() {
-            if (currentMCQStep < 3) {
+            if (currentMCQStep < TOTAL_MCQ) {
                 // Hide current question, show next
                 document.getElementById(`step-q${currentMCQStep}`).classList.add("hidden");
                 currentMCQStep++;
                 document.getElementById(`step-q${currentMCQStep}`).classList.remove("hidden");
 
                 // Update Header Text
-                document.getElementById("mcq-title-text").innerText = `第 ${currentMCQStep} 題 / 共 3 題`;
+                document.getElementById("mcq-title-text").innerText = `第 ${currentMCQStep} 題 / 共 ${TOTAL_MCQ} 題`;
 
                 // Hide Next Container until next answer is clicked
                 document.getElementById("next-btn-container").classList.add("hidden");
@@ -468,11 +674,11 @@
 
             if (isDragSection) {
                 stepLabel.innerText = "第二階段：表格填空測驗";
-                stepPercent.innerText = "80%";
-                progressBar.style.width = "80%";
-            } else if (currentMCQStep <= 3) {
-                const percent = Math.round((currentMCQStep / 4) * 100);
-                stepLabel.innerText = `第一階段：選擇題 (${currentMCQStep}/3)`;
+                stepPercent.innerText = "90%";
+                progressBar.style.width = "90%";
+            } else if (currentMCQStep <= TOTAL_MCQ) {
+                const percent = Math.round((currentMCQStep / (TOTAL_MCQ + 1)) * 100);
+                stepLabel.innerText = `第一階段：選擇題 (${currentMCQStep}/${TOTAL_MCQ})`;
                 stepPercent.innerText = `${percent}%`;
                 progressBar.style.width = `${percent}%`;
             }
@@ -489,7 +695,7 @@
                 card.id = `card-${item.id}`;
                 card.dataset.id = item.id;
                 card.draggable = true;
-                card.className = "drag-item bg-white border border-slate-300 text-slate-800 px-3.5 py-2 rounded-xl text-sm font-medium shadow-sm hover:border-indigo-400 hover:text-indigo-600 transition flex items-center gap-2";
+                card.className = "drag-item bg-white border border-slate-300 text-slate-800 px-3.5 py-2 rounded-xl text-base font-medium shadow-sm hover:border-indigo-400 hover:text-indigo-600 transition flex items-center gap-2";
                 card.innerHTML = `<i class="fa-solid fa-grip-dots-vertical text-slate-300"></i> <span>${item.text}</span>`;
 
                 card.addEventListener("dragstart", handleDragStart);
@@ -591,10 +797,10 @@
         // Final Submission and Scoring
         function submitFillInBlanks() {
             let correctCount = 0;
-            const totalQuestions = 9; // 3 MCQs + 6 Drag & Drops
+            const totalQuestions = TOTAL_MCQ + 6; // TOTAL_MCQ + 6 Drag & Drops
 
             // Count MCQ score
-            for (let q = 1; q <= 3; q++) {
+            for (let q = 1; q <= TOTAL_MCQ; q++) {
                 if (userSelectOptions[q] === correctOptions[q]) {
                     correctCount++;
                 }
@@ -654,11 +860,11 @@
 
         // Full Reset
         function resetQuiz() {
-            userSelectOptions = { 1: null, 2: null, 3: null };
+            userSelectOptions = { 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null, 8: null };
             currentMCQStep = 1;
 
             // Reset MCQs UI
-            for (let q = 1; q <= 3; q++) {
+            for (let q = 1; q <= TOTAL_MCQ; q++) {
                 document.getElementById(`explain-${q}`).classList.add("hidden");
                 const step = document.getElementById(`step-q${q}`);
                 if (q === 1) {
@@ -670,13 +876,13 @@
                 const options = document.querySelectorAll(`.q${q}-opt`);
                 options.forEach(opt => {
                     opt.disabled = false;
-                    opt.className = `option-card q${q}-opt text-left p-3.5 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-sm flex items-center justify-between`;
+                    opt.className = `option-card q${q}-opt text-left p-4 border border-slate-200 rounded-xl hover:bg-blue-50/50 hover:border-blue-300 transition text-base flex items-center justify-between`;
                     const icon = opt.querySelector(".check-icon");
-                    icon.className = "fa-regular fa-circle text-slate-300 check-icon";
+                    icon.className = "fa-regular fa-circle text-slate-300 check-icon text-lg";
                 });
             }
 
-            document.getElementById("mcq-title-text").innerText = `第 1 題 / 共 3 題`;
+            document.getElementById("mcq-title-text").innerText = `第 1 題 / 共 ${TOTAL_MCQ} 題`;
             document.getElementById("next-btn-container").classList.add("hidden");
 
             // Reset Zones & Sections
@@ -687,7 +893,7 @@
                 const placeholder = zone.querySelector(".zone-placeholder");
                 if (placeholder) placeholder.style.display = "inline";
 
-                zone.className = "drop-zone inline-flex items-center justify-center min-w-[140px] h-9 mx-1 px-3 bg-slate-100 border-2 border-dashed border-slate-300 rounded-lg align-middle";
+                zone.className = "drop-zone inline-flex items-center justify-center min-w-[150px] min-h-[42px] mx-1 px-3 bg-slate-100 border-2 border-dashed border-slate-300 rounded-lg align-middle";
             });
 
             document.getElementById("mcq-section").classList.remove("hidden");
